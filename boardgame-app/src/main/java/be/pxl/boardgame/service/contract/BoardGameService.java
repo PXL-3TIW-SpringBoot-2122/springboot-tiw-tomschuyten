@@ -7,6 +7,7 @@ import be.pxl.boardgame.repository.BoardGameRepository;
 import be.pxl.boardgame.service.IBoardGameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,6 +30,7 @@ public class BoardGameService implements IBoardGameService {
     }
 
     @Override
+    //@Secured(value = "ROLE_ADMIN")
     public List<BoardGameResponse> getAllBoardGames() {
 
         List<BoardGame> boardGameList = boardGameRepository.findAll();
