@@ -3,6 +3,7 @@ package be.pxl.boardgame;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -14,6 +15,7 @@ import javax.sql.DataSource;
 
 @SpringBootApplication
 @EnableGlobalMethodSecurity(securedEnabled = true)
+@EnableAspectJAutoProxy
 public class BoardgameAppApplication extends WebSecurityConfigurerAdapter {
 
     public static void main(String[] args) {
@@ -38,9 +40,9 @@ public class BoardgameAppApplication extends WebSecurityConfigurerAdapter {
                 .passwordEncoder(new BCryptPasswordEncoder())
                 .dataSource(ds)
                 .usersByUsernameQuery(
-                        "select name, password, enabled from users where name = ?"
+                        "select name, password, enabled from Users where name = ?"
                 ).authoritiesByUsernameQuery(
-                        "select name, role from users where name = ?"
+                        "select name, role from Users where name = ?"
                 );
     }
 }
